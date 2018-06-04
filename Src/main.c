@@ -52,6 +52,7 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+uint8_t Received;
 
 /* USER CODE END PV */
 
@@ -64,7 +65,8 @@ static void MX_USART1_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+
+/*void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 	static uint16_t cnt = 0; // licznik wys³anych wiadmosci
 	uint8_t data[50]; // tablica przechowuj¹ca wysy³ane wiadomoœci
@@ -82,6 +84,34 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	HAL_GPIO_TogglePin(LED_Green_GPIO_Port,LED_Green_Pin);
 	//zmiana stanu pinu na diodzie LED
 
+}
+*/
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+
+ uint8_t Data[50]; // Tablica przechowujaca wysylana wiadomosc.
+ uint16_t size = 0; // Rozmiar wysylanej wiadomosci
+
+ // Odebrany znak zostaje przekonwertowany na liczbe calkowita i sprawdzony
+ // instrukcja warunkowa
+ switch (atoi(&Received)) {
+
+		 case 0: // Jezeli odebrany zostanie znak 0
+		 size = sprintf(Data, "STOP\n\r");
+		 HAL_GPIO_WritePin(LED_Green_GPIO_Port, LED_Green_Pin, GPIO_PIN_RESET);
+		 break;
+
+		 case 1: // Jezeli odebrany zostanie znak 1
+		 size = sprintf(Data, "START\n\r");
+		 HAL_GPIO_WritePin(LED_Green_GPIO_Port, LED_Green_Pin, GPIO_PIN_SET);
+		 break;
+
+		 default: // Jezeli odebrano nieobslugiwany znak
+		 size = sprintf(Data, "Odebrano nieznany znak: %c\n\r", Received);
+		 break;
+ }
+
+ HAL_UART_Transmit_IT(&huart1, Data, size); // Rozpoczecie nadawania danych z wykorzystaniem przerwan
+ HAL_UART_Receive_IT(&huart1, &Received, 1); // Ponowne w³¹czenie nas³uchiwania
 }
 /* USER CODE END PFP */
 
@@ -123,6 +153,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim10);
+  HAL_UART_Receive_IT(&huart1, &Received,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
