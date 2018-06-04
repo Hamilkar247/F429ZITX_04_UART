@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>F429ZITX_04_UART</name>
-<<<<<<< HEAD
 	<comment></comment>
-=======
-	<comment />
->>>>>>> 0.01-Dzialajaca-odbieranie-danych-przez-uarta
 	<projects>
 	</projects>
 	<buildSpec>
@@ -19,11 +15,7 @@
 				</dictionary>
 				<dictionary>
 					<key>?name?</key>
-<<<<<<< HEAD
 					<value></value>
-=======
-					<value />
->>>>>>> 0.01-Dzialajaca-odbieranie-danych-przez-uarta
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.append_environment</key>
@@ -31,11 +23,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-<<<<<<< HEAD
 					<value></value>
-=======
-					<value />
->>>>>>> 0.01-Dzialajaca-odbieranie-danych-przez-uarta
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -82,10 +70,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-<<<<<<< HEAD
-=======
-	<linkedResources>
-		
-	</linkedResources>
->>>>>>> 0.01-Dzialajaca-odbieranie-danych-przez-uarta
 </projectDescription>
